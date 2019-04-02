@@ -1,0 +1,31 @@
+[
+  {
+    "Name": "Mauro Contretas",
+    "DOB": "21/12/1992 00:00:00",
+    "Gender": 0,
+    "Phone": 432233444,
+    "Height": 1.56,
+    "IsFryend": false,
+    "Photo":  "male.png"
+  }, 
+  {
+    "Name": "Maria Fuentes",
+    "DOB": "23/11/1989 00:00:00",
+    "Gender": 1,
+    "Phone": 777777555,
+    "Height": 1.59,
+    "IsFryend": true,
+    "Photo": "female.png"
+  },
+
+  {
+    "Name": "Mariano Quien Save",
+    "DOB": "01/11/1999 00:00:00",
+    "Gender": 2,
+    "Phone": 2333342,
+    "Height": 1.49,
+    "IsFryend": false,
+    "Photo": "neutral.png"
+
+  }
+]

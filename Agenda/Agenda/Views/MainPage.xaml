@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Agenda"
+             x:Class="Agenda.MainPage">
+
+    <ContentPage.Resources>
+        <DataTemplate x:Key="PersonsDT">
+            <ViewCell>
+                <!--<ViewCell.ContextActions>
+                    <MenuItem Text="Delete" 
+                              Clicked="DeleteContext_Clicked"
+                              CommandParameter="{Binding .}"
+                              IsDestructive="True" />
+                </ViewCell.ContextActions>-->
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="{Binding Path=Photo}" WidthRequest="100"></Image>
+                    
+                    <StackLayout Margin="2">
+                        <StackLayout Orientation="Horizontal" Margin="2, 1">
+                            <Label Text="Name: " />
+                            <Label Text="{Binding Path=Name}" />
+                        </StackLayout>
+                        
+                        <StackLayout Orientation="Horizontal" Margin="2, 1">
+                            <Label Text="Phone: " />
+                            <Label Text="{Binding Path=Phone}" />
+                        </StackLayout>
+
+                    </StackLayout>
+                </StackLayout>
+            </ViewCell>
+        </DataTemplate>
+
+        <Style x:Key="LabelStyle" TargetType="Label" >
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="WidthRequest" Value="100"/>
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="Entry" >
+            <Setter Property="FontSize" Value="Small" />
+            <Setter Property="TextColor" Value="RoyalBlue" />
+            <Setter Property="WidthRequest" Value="200"/>
+        </Style>
+    </ContentPage.Resources>
+
+
+    <StackLayout x:Name="Main">
+        <Grid x:Name="MainGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Text="My Agenda"
+                   Grid.Column="0" Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="Center"
+                   FontSize="Large"></Label>
+            
+            <ListView x:Name="PersonsLV"
+                      ItemTemplate="{StaticResource PersonsDT}"
+                      ItemsSource="{Binding Persons}"
+                      Grid.Column="0" Grid.Row="1"
+                      ItemSelected="PersonsLV_ItemSelected"/>
+
+
+            <Grid x:Name="OneGrid"
+                  BindingContext="{Binding SelectedPerson}"
+                  Grid.Column="1" Grid.Row="1"
+                  HeightRequest="500"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Name:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="0"/>
+                <Label Text="DOB:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="1"/>
+                <Label Text="Gender:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="2"/>
+                <Label Text="Phone:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="3"/>
+                <Label Text="Height:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="4"/>
+                <Label Text="Fryend:" Style="{StaticResource LabelStyle }"
+                       Grid.Column="0" Grid.Row="5"/>
+
+                <Entry Text="{Binding Path=Name}"
+                        Grid.Column="1" Grid.Row="0"
+                       Style="{StaticResource EntryStyle}"/>
+                <Entry Text="{Binding Path=DOB}"
+                        Grid.Column="1" Grid.Row="1"
+                       Style="{StaticResource EntryStyle}"/>
+                <Entry Text="{Binding Path=Gender}"
+                        Grid.Column="1" Grid.Row="2"
+                       Style="{StaticResource EntryStyle}"/>
+                <Entry Text="{Binding Path=Phone}"
+                        Grid.Column="1" Grid.Row="3"
+                       Style="{StaticResource EntryStyle}"/>
+                <Entry Text="{Binding Path=Height}"
+                        Grid.Column="1" Grid.Row="4"
+                       Style="{StaticResource EntryStyle}"/>
+                <Entry Text="{Binding Path=IsFryend}"
+                        Grid.Column="1" Grid.Row="5"
+                       Style="{StaticResource EntryStyle}"/>
+            </Grid>
+
+            <StackLayout x:Name="ButtonsSL" Orientation="Vertical"
+                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                <Button Text="Save List"
+                        Command="{Binding SaveListCommand}"/>
+
+            </StackLayout>
+        </Grid>
+        
+    </StackLayout>
+</ContentPage>
