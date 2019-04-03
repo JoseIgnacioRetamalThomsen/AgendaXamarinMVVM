@@ -17,7 +17,7 @@ namespace Agenda
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(new PageService());
 
             ObservableCollection<Person> p = Local.ReadPersons();
             Debug.WriteLine(p[0].DOB);

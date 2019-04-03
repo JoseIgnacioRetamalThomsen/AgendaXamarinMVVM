@@ -17,5 +17,16 @@ namespace Agenda.Model
         public float Height { get; set; }
         public bool IsFryend { get; set; }
         public string Photo { get; set; }
+
+        public Person(string name, DateTime dOB, GenderType gender, int phone, float height, bool isFryend, string photo)
+        {
+            Name = name;
+            DOB = dOB;
+            Gender = gender;
+            Phone = phone;
+            Height = height;
+            IsFryend = isFryend;
+            Photo = photo;
+        }
     }
 }

@@ -41,6 +41,7 @@
             <Setter Property="FontSize" Value="Small" />
             <Setter Property="TextColor" Value="RoyalBlue" />
             <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HeightRequest" Value="50"/>
         </Style>
     </ContentPage.Resources>
 
@@ -52,9 +53,9 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="400"/>
+                <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
 
             <Label Text="My Agenda"
@@ -73,18 +74,18 @@
             <Grid x:Name="OneGrid"
                   BindingContext="{Binding SelectedPerson}"
                   Grid.Column="1" Grid.Row="1"
-                  HeightRequest="500"
-                >
+                  HeightRequest="300">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
                 <Label Text="Name:" Style="{StaticResource LabelStyle }"
@@ -125,6 +126,8 @@
                 <Button Text="Save List"
                         Command="{Binding SaveListCommand}"/>
 
+                <Button Text="Add new"
+                         Command ="{Binding NavigateToNewCommand}"/>
             </StackLayout>
         </Grid>
         

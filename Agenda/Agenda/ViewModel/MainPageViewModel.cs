@@ -1,5 +1,6 @@
 ﻿using Agenda.Data;
 using Agenda.Model;
+using Agenda.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,11 +45,21 @@ namespace Agenda.ViewModel
 
         #region
         public ICommand SaveListCommand { get; private set; }
+        public ICommand NavigateToNewCommand { get; private set; }
+
+        private IPageService _pageService;
         #endregion
-        public MainPageViewModel()
+        public MainPageViewModel(IPageService ps)
         {
             LoadItems();
+            _pageService = ps;
             SaveListCommand = new Command(SaveList);
+            NavigateToNewCommand = new Command(NavigateToNew);
+}
+
+        private async void NavigateToNew(object obj)
+        {
+           await _pageService.PushAsnyc(new NewPersonView());
         }
 
         private void SaveList(object obj)
