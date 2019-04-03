@@ -1,5 +1,4 @@
-﻿using Agenda.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Agenda.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewPersonView : ContentPage
-	{
-		public NewPersonView ()
+	public partial class MainTabs : TabbedPage
+    {
+		public MainTabs ()
 		{
 			InitializeComponent ();
-            BindingContext = new NewPersonViewModel(new PageService());
 		}
 	}
 }

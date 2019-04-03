@@ -7,12 +7,18 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="PersonsDT">
             <ViewCell>
-                <!--<ViewCell.ContextActions>
+                
+                <ViewCell.ContextActions>
                     <MenuItem Text="Delete" 
-                              Clicked="DeleteContext_Clicked"
+                    Clicked="MenuItem_Clicked"
+                    CommandParameter="{Binding .}"
+                    IsDestructive="True" />
+                    <MenuItem Text="View in new page"
+                              Clicked="MenuItem_Clicked_1"
                               CommandParameter="{Binding .}"
-                              IsDestructive="True" />
-                </ViewCell.ContextActions>-->
+                              IsDestructive="False"/>
+                </ViewCell.ContextActions>
+                
                 <StackLayout Orientation="Horizontal">
                     <Image Source="{Binding Path=Photo}" WidthRequest="100"></Image>
                     
@@ -58,17 +64,19 @@
                 <RowDefinition Height="200"/>
             </Grid.RowDefinitions>
 
-            <Label Text="My Agenda"
-                   Grid.Column="0" Grid.Row="0"
-                   Grid.ColumnSpan="2"
-                   HorizontalOptions="Center"
-                   FontSize="Large"></Label>
-            
+            <Label 
+                x:Name="TitleLabel"
+                Text="My Agenda"
+                Grid.Column="0" Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Center"
+                FontSize="Large"></Label>
+            <!--ItemSelected="PersonsLV_ItemSelected"-->
             <ListView x:Name="PersonsLV"
                       ItemTemplate="{StaticResource PersonsDT}"
                       ItemsSource="{Binding Persons}"
                       Grid.Column="0" Grid.Row="1"
-                      ItemSelected="PersonsLV_ItemSelected"/>
+                      SelectedItem="{Binding SelectedPerson}"/>
 
 
             <Grid x:Name="OneGrid"
@@ -98,15 +106,17 @@
                        Grid.Column="0" Grid.Row="3"/>
                 <Label Text="Height:" Style="{StaticResource LabelStyle }"
                        Grid.Column="0" Grid.Row="4"/>
-                <Label Text="Fryend:" Style="{StaticResource LabelStyle }"
+                <Label Text="Friend:" Style="{StaticResource LabelStyle }"
                        Grid.Column="0" Grid.Row="5"/>
 
                 <Entry Text="{Binding Path=Name}"
                         Grid.Column="1" Grid.Row="0"
                        Style="{StaticResource EntryStyle}"/>
-                <Entry Text="{Binding Path=DOB}"
+                <!--<Entry Text="{Binding Path=DOB}"
                         Grid.Column="1" Grid.Row="1"
-                       Style="{StaticResource EntryStyle}"/>
+                       Style="{StaticResource EntryStyle}"/>-->
+                <DatePicker Date="{Binding Path=DOB}"
+                            Grid.Column="1" Grid.Row="1"/>
                 <Entry Text="{Binding Path=Gender}"
                         Grid.Column="1" Grid.Row="2"
                        Style="{StaticResource EntryStyle}"/>

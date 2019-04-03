@@ -1,4 +1,5 @@
 ﻿using Agenda.Model;
+using Agenda.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace Agenda.Data
         public  const string JSON_PERSONS_FILE = "persons.json";
         public const string LocalPath = "Agenda.Data.persons.json";
 
-        public static ObservableCollection<Person> ReadPersons()
+        public static ObservableCollection<PersonViewModel> ReadPersons()
         {
             var jsonSettings = new JsonSerializerSettings();
             jsonSettings.DateFormatString = "dd/MM/yyyy hh:mm:ss";
 
-            ObservableCollection<Person> myList = new ObservableCollection<Person>();
+            ObservableCollection<PersonViewModel> myList = new ObservableCollection<PersonViewModel>();
             string jsonText;
 
             try  // reading the localApplicationFolder first
@@ -47,13 +48,13 @@ namespace Agenda.Data
                 }
             }
 
-            myList = JsonConvert.DeserializeObject<ObservableCollection<Person>>(jsonText,jsonSettings);
+            myList = JsonConvert.DeserializeObject<ObservableCollection<PersonViewModel>>(jsonText,jsonSettings);
 
             return myList;
         }
 
 
-        public static void SavePersons(ObservableCollection<Person> saveList)
+        public static void SavePersons(ObservableCollection<PersonViewModel> saveList)
         {
             // need the path to the file
             string path = Environment.GetFolderPath(

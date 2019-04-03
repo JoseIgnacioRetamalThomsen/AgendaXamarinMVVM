@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace Agenda.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class NewPersonView : ContentPage
+	public partial class OnePersonView : ContentPage
 	{
-		public NewPersonView ()
+		public OnePersonView (PersonViewModel person)
 		{
 			InitializeComponent ();
-            BindingContext = new NewPersonViewModel(new PageService());
+            BindingContext = new OnePersonViewModel(person);
 		}
 	}
 }

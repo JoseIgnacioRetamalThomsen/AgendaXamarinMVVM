@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Agenda.Views.NewPersonView">
+      
+             
+             x:Class="Agenda.Views.OnePersonView">
+
     <ContentPage.Resources>
-        
+      
 
         <Style x:Key="LabelStyle" TargetType="Label" >
             <Setter Property="FontSize" Value="Small" />
@@ -20,9 +23,7 @@
 
     <ContentPage.Content>
 
-        
-
-            <StackLayout x:Name="Main">
+        <StackLayout x:Name="Main">
             <Grid x:Name="MainGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -34,17 +35,19 @@
                     <RowDefinition Height="200"/>
                 </Grid.RowDefinitions>
 
-                <Label Text="My Agenda"
-                   Grid.Column="0" Grid.Row="0"
-                   Grid.ColumnSpan="2"
-                   HorizontalOptions="Center"
-                   FontSize="Large"></Label>
+                <Label 
+                x:Name="TitleLabel"
+                Text="My Agenda"
+                Grid.Column="0" Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Center"
+                FontSize="Large"></Label>
+
+              
 
 
-
-                <!--BindingContext="{Binding Person}"-->
                 <Grid x:Name="OneGrid"
-                
+                  BindingContext="{Binding Person}"
                   Grid.Column="0" Grid.Row="1"
                   HeightRequest="300">
                     <Grid.ColumnDefinitions>
@@ -73,51 +76,29 @@
                     <Label Text="Friend:" Style="{StaticResource LabelStyle }"
                        Grid.Column="0" Grid.Row="5"/>
 
-                    <Entry Text="{Binding Path=Person.Name, Mode=TwoWay}"
+                    <Entry Text="{Binding Path=Name}"
                         Grid.Column="1" Grid.Row="0"
                        Style="{StaticResource EntryStyle}"/>
-                    <DatePicker 
-                        Date="{Binding Path=Person.DOB, Mode=TwoWay}"
-                        Grid.Column="1" Grid.Row="1"/>
-                                           
-                    <Picker 
-                        
-                        ItemsSource="{Binding Path=Genders}"
+             
+                    <DatePicker Date="{Binding Path=DOB}"
+                            Grid.Column="1" Grid.Row="1"/>
+                    <Entry Text="{Binding Path=Gender}"
                         Grid.Column="1" Grid.Row="2"
-                        SelectedItem="{Binding SelectedGender}"/>
-
-                    <Entry Text="{Binding Path=Person.Phone}"
+                       Style="{StaticResource EntryStyle}"/>
+                    <Entry Text="{Binding Path=Phone}"
                         Grid.Column="1" Grid.Row="3"
                        Style="{StaticResource EntryStyle}"/>
-                    
-                    <!--<Entry Text="{Binding Path=Person.Height}"
+                    <Entry Text="{Binding Path=Height}"
                         Grid.Column="1" Grid.Row="4"
-                       Style="{StaticResource EntryStyle}"/>-->
-                    <StackLayout
-                        Orientation="Horizontal"
-                         Grid.Column="1" Grid.Row="4">
-                        <Picker ItemsSource="{Binding Heigth_Meter}"
-                                SelectedItem="{Binding SelectMeter}"
-                                />
-                        <Picker ItemsSource="{Binding Heigth_Cm}"
-                                SelectedItem="{Binding SelectCM}"/>
-
-
-                    </StackLayout>
-                    <Entry Text="{Binding Path=Person.IsFryend}"
+                       Style="{StaticResource EntryStyle}"/>
+                    <Entry Text="{Binding Path=IsFryend}"
                         Grid.Column="1" Grid.Row="5"
                        Style="{StaticResource EntryStyle}"/>
                 </Grid>
 
-                <StackLayout x:Name="ButtonsSL" Orientation="Horizontal"
-                         Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
-                    <Button Text="Save List"
-                        Command="{Binding AddPersonCommand}"/>
-
-                </StackLayout>
+                
             </Grid>
 
-          
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

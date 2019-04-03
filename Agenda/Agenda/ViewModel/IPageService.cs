@@ -9,5 +9,8 @@ namespace Agenda.ViewModel
     public interface IPageService
     {
         Task PushAsnyc(Page page);
+
+        Task<bool> DisplayAlert(string title, string message,
+                               string ok, string cancel);
     }
 }

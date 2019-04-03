@@ -14,18 +14,43 @@ namespace Agenda
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public  MainPage()
         {
             InitializeComponent();
             BindingContext = new MainPageViewModel(new PageService());
 
-            ObservableCollection<Person> p = Local.ReadPersons();
-            Debug.WriteLine(p[0].DOB);
+
+            Task.Run(() => { Move(); }); ;
+                
+            
         }
 
-        private void PersonsLV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void Move()
         {
-            ((MainPageViewModel)BindingContext).SelectOnePersons(e.SelectedItem as Person);
+            while (true)
+            {
+                await TitleLabel.TranslateTo(500, 0, 5000);
+                await TitleLabel.TranslateTo(-500, 0, 5000);
+            }
+           // await TitleLabel.TranslateTo(500, 0, 1000);
+        }
+
+        //private void PersonsLV_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        //{
+        //    ((MainPageViewModel)BindingContext).SelectOnePersons(e.SelectedItem as Person);
+        //}
+
+        private void MenuItem_Clicked(object sender, EventArgs e)
+        {
+            PersonViewModel person = (sender as MenuItem).CommandParameter as PersonViewModel;
+            (BindingContext as MainPageViewModel).DeleteCommand.Execute(person);
+        }
+
+        private async void MenuItem_Clicked_1(object sender, EventArgs e)
+        {
+            PersonViewModel person = (sender as MenuItem).CommandParameter as PersonViewModel;
+            Debug.WriteLine(person.Name);
+           await (BindingContext as MainPageViewModel).SelectPerson(person);
         }
     }
 }

@@ -4,18 +4,20 @@ using Agenda.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Agenda.ViewModel
 {
-    public class MainPageViewModel :BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
         #region Fields
-        private ObservableCollection<Person> _persons;
+        private ObservableCollection<PersonViewModel> _persons;
 
-        public ObservableCollection<Person> Persons
+        public ObservableCollection<PersonViewModel> Persons
         {
             get
             {
@@ -27,9 +29,9 @@ namespace Agenda.ViewModel
             }
         }
 
-        private Person _selectedPerson;
+        private PersonViewModel _selectedPerson;
 
-        public Person SelectedPerson
+        public PersonViewModel SelectedPerson
         {
             get
             {
@@ -46,6 +48,8 @@ namespace Agenda.ViewModel
         #region
         public ICommand SaveListCommand { get; private set; }
         public ICommand NavigateToNewCommand { get; private set; }
+        public ICommand ViewAcctionCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
 
         private IPageService _pageService;
         #endregion
@@ -55,11 +59,42 @@ namespace Agenda.ViewModel
             _pageService = ps;
             SaveListCommand = new Command(SaveList);
             NavigateToNewCommand = new Command(NavigateToNew);
-}
+            ViewAcctionCommand = new Command(ViewAction);
+            DeleteCommand = new Command<PersonViewModel>(Delete);
+        }
+
+        public async Task SelectPerson(PersonViewModel person)
+        {
+            // can't use a command directly as there is only a commandRefresh
+            // attribute
+
+            if (_persons == null)
+                return;
+            //await Navigation.PushAsync(new DogDetailsPage(dog));
+            /*
+             * select a dog, go to the page
+             * no Navigation property in the view model
+             * member of the page class - same as the DisplayAlert
+             * Use an interface
+             */
+            Debug.WriteLine("here");
+            await _pageService.PushAsnyc(new OnePersonView(person));
+
+        }
+
+        private void Delete(PersonViewModel p)
+        {
+            Persons.Remove(p);
+        }
+
+        private void ViewAction(object obj)
+        {
+            throw new NotImplementedException();
+        }
 
         private async void NavigateToNew(object obj)
         {
-           await _pageService.PushAsnyc(new NewPersonView());
+            await _pageService.PushAsnyc(new NewPersonView());
         }
 
         private void SaveList(object obj)
@@ -70,12 +105,12 @@ namespace Agenda.ViewModel
         private void LoadItems()
         {
             Persons = Local.ReadPersons();
-            
+
         }
 
-       
 
-        public void SelectOnePersons(Person p)
+
+        public void SelectOnePersons(PersonViewModel p)
         {
             SelectedPerson = p;
         }
